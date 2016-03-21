@@ -1,2 +1,6 @@
 ---
-# handlers file for sa-lamp
+# handlers file for pr.moodle
+
+  - name: restart apache2
+    shell: name=apache2 state=restarted
+    sudo: yes

@@ -3,7 +3,7 @@
 
   pre_tasks:
 
-    - name: Moodle | Ensure multiverse repo is enabled
+    - name: TRAVIS TEST | Ensure multiverse repo is enabled
       apt_repository:
         repo: "{{item}}"
         update_cache: false
@@ -24,6 +24,5 @@
   roles:
     - {
         role: "role_under_test",
-        prudentia_dir: "/usr/local/lib/python2.7/dist-packages/prudentia"
       }
 
