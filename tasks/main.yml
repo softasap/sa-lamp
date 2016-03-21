@@ -34,7 +34,6 @@
 
 - name: LAMP | Install LAMP stack - select php family
   include: "php_apt_switchversion.yml"
-  when: option_install_lamp == true
 
 - name: LAMP | Install LAMP stack
   include: "php_apache.yml"
@@ -47,4 +46,3 @@
 - name: LAMP | Enable incoming http(s) with ufw
   include: "ubuntu_configure_existing_ufw.yml"
   when: option_enable_ufw_http == true
-
