@@ -1,38 +1,56 @@
-Role Name
-=========
+# Basic lamp role
 
-A brief description of the role goes here.
+[![Build Status](https://travis-ci.org/softasap/sa-lamp.svg?branch=master)](https://travis-ci.org/softasap/sa-lamp)
 
-Requirements
-------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+# Background
 
-Role Variables
---------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## Challenges to address
+  * Optionally install MySQL (you might use external database)
+  * Install Lamp  
 
-Dependencies
-------------
+Let's go step by step.
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
-Example Playbook
-----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+## Describing desired components
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+Let's list both package dependencies and needed php extensions.
+<pre>
+  pkg_dependencies:
+    - git
+    - curl
+    - python-dev
+    - libmysqlclient-dev
 
-License
--------
+  php_extensions:
+    - php5-mysql
+    - php5-intl
+    - php5-xmlrpc
+    - php5-curl
+    - php5-gd
+</pre>
 
-BSD
 
-Author Information
-------------------
+## Optional MySQL installation
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+In order to install MySQl, you will need to specify desired mysql root credentials only.
+<pre>
+  mysql_host: "127.0.0.1"
+  mysql_root_user: root
+  mysql_root_password: SOMEROOTSECUREPASSWORD
+</pre>
+
+
+## LAMP installation
+For LAMP we have ability to install apache either in worker or prefork mode.
+This has impact on PHP: it will be installed either as PHP-FPM or via mod_php apache module.
+Nowadays worker is preferable.
+<pre>
+  apache_mode: worker # use prefork or worker variables
+  apache2_disable_default: true
+
+  php_family: default # 5.4 | 5.5 | 5.6 | default
+</pre>
+
