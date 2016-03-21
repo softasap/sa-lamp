@@ -1,0 +1,50 @@
+---
+# tasks file for pr.moodle
+
+- name: LAMP | needed tools
+  apt: update-cache=yes force=yes state=present pkg={{ item }}
+  sudo: yes
+  with_items: pkg_dependencies
+
+- name: LAMP | install python-pip
+  apt: name=python-pip update_cache=yes state=latest
+  sudo: yes
+
+- name: LAMP | Update pip
+  shell: pip install -U pip
+  sudo: yes
+
+- name: LAMP | Install modules for mysql management
+  pip: name={{item}}
+  sudo: yes
+  with_items:
+    - MySQL-python
+
+- name: LAMP | Enable multiverse
+  include: "ubuntu_enable_multiverse.yml"
+  when: option_enable_multiverse == true
+
+- name: LAMP | Install mysql
+  include: "mysql.yml"
+  when: option_install_mysql == true
+
+- name: LAMP | Install APACHE
+  include: "apache.yml"
+  when: option_install_apache == true
+
+- name: LAMP | Install LAMP stack - select php family
+  include: "php_apt_switchversion.yml"
+  when: option_install_lamp == true
+
+- name: LAMP | Install LAMP stack
+  include: "php_apache.yml"
+  when: option_install_apache == true
+
+- name: LAMP | Install additional php extensions
+  include: "php_additional_extensions.yml"
+  when: php_extensions is defined
+
+- name: LAMP | Enable incoming http(s) with ufw
+  include: "ubuntu_configure_existing_ufw.yml"
+  when: option_enable_ufw_http == true
+
