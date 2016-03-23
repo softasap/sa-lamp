@@ -54,3 +54,16 @@ Nowadays worker is preferable.
   php_family: default # 5.4 | 5.5 | 5.6 | default
 </pre>
 
+
+
+## Usage example
+
+<pre>
+
+     - {
+         role: "sa-lamp",
+         option_install_mysql: false
+       }
+
+
+</pre>
