@@ -7,11 +7,6 @@ env:
     init: /sbin/init
     run_opts: ""
     playbook: test.yml
-  - distribution: ubuntu
-    version: 16.04
-    init: /sbin/init
-    run_opts: "--volume=/sys/fs/cgroup:/sys/fs/cgroup:ro --cap-add=SYS_ADMIN --security-opt=seccomp:unconfined"
-    playbook: test.yml
 
 # whitelist
 branches:
