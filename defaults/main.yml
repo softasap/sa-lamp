@@ -1,7 +1,7 @@
 ---
-# defaults file for pr.moodle
+# defaults file for sa-lamp
 
-  role_dir: "{{ lookup('pipe','pwd')|dirname }}"
+  role_dir: "{{ role_path }}"
 
 # unset if you have different recipe for mysql
   option_install_mysql: true
