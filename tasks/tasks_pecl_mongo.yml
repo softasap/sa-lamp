@@ -5,17 +5,20 @@
       - php-pear
       - php5-dev
       - libcurl3-openssl-dev
-    tags: php-mongo
+    tags:
+      - php-mongo
 
   - name: OBSOLETE MONGOCLIENT | Detect module path
     shell: echo `php -i | grep extension_dir | awk '{print $(NF)}'`
     register: php_module_path
-    tags: php-mongo
+    tags:
+      - php-mongo
 
   - name: OBSOLETE MONGOCLIENT | Detect ini path
     shell: echo `php -i | grep "Scan this dir for additional .ini files" | awk '{print $(NF)}'`
     register: php_extension_conf_path
-    tags: php-mongo
+    tags:
+      - php-mongo
 
 
   - name: OBSOLETE MONGOCLIENT |Copy  INI into php.d folder.
@@ -32,7 +35,8 @@
     become: yes
     when: apache_mode == "prefork"
     notify: restart apache2
-    tags: php-mongo
+    tags:
+      - php-mongo
 
   - name: OBSOLETE MONGOCLIENT | Copy  INI into php.d folder.
     template:
@@ -48,13 +52,16 @@
     become: yes
     when: apache_mode == "worker"
     notify: restart fpm
-    tags: php-mongo
+    tags:
+      - php-mongo
 
   - name: OBSOLETE MONGOCLIENT | install MongoClient for php
     shell: printf "\n" | pecl install mongo creates={{php_extension_dir.stdout_lines[0]}}/mongo.so
-    tags: php-mongo
+    tags:
+      - php-mongo
 
   - name: OBSOLETE MONGOCLIENT | make mongo.so executable
     file: path={{php_extension_dir.stdout_lines[0]}}/mongo.so mode=0755
-    tags: php-mongo
     notify: restart apache2
+    tags:
+      - php-mongo

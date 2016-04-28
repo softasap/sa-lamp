@@ -3,20 +3,20 @@
 
 - name: LAMP | needed tools
   apt: update-cache=yes force=yes state=present pkg={{ item }}
-  sudo: yes
-  with_items: pkg_dependencies
+  become: yes
+  with_items: "{{pkg_dependencies}}"
 
 - name: LAMP | install python-pip
   apt: name=python-pip update_cache=yes state=latest
-  sudo: yes
+  become: yes
 
 - name: LAMP | Update pip
   shell: pip install -U pip
-  sudo: yes
+  become: yes
 
 - name: LAMP | Install modules for mysql management
   pip: name={{item}}
-  sudo: yes
+  become: yes
   with_items:
     - MySQL-python
 

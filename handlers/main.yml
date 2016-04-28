@@ -3,4 +3,5 @@
 
   - name: restart apache2
     service: name=apache2 state=restarted
-    sudo: yes
+    when: docker_test is not defined    
+    become: yes

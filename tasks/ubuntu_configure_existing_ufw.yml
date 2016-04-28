@@ -1,7 +1,7 @@
 ---
   - name: UFW | Allow incoming http & https
     shell: "ufw allow {{item}}"
-    sudo: yes
+    become: yes
     ignore_errors: yes
     with_items:
       - http
