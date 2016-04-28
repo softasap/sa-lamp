@@ -1,0 +1,4 @@
+[submodule "roles/sa-lamp"]
+        path = roles/sa-lamp
+        url = https://github.com/softasap/sa-lamp.git
+
