@@ -67,3 +67,8 @@ Nowadays worker is preferable.
 
 
 </pre>
+
+
+### Version History
+
+1.2.0  Support for ansible 2.0 syntax ; Introduced tests for 16.04
