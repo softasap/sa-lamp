@@ -71,4 +71,5 @@ Nowadays worker is preferable.
 
 ### Version History
 
+1.3.0  (cosmetic) Fixed mess with tags in meta
 1.2.0  Support for ansible 2.0 syntax ; Introduced tests for 16.04
