@@ -26,10 +26,12 @@ galaxy_info:
         - trusty
         - xenial
   galaxy_tags:
-    - mongo
+    - php
+    - mysql
+    - apache
+    - php-fpm
+    - lamp
     - ubuntu
-  dependencies:
-  - role: Voronenko.developer_recipe
   #platforms:
   #- name: EL
   #  versions:
