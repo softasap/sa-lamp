@@ -36,6 +36,7 @@
   when: option_enable_multiverse == true
   tags:
     - travis_1
+    - travis_2
 
 
 - name: LAMP | Install mysql

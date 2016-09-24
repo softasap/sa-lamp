@@ -24,5 +24,6 @@
   roles:
     - {
         role: "role_under_test",
+        option_enable_multiverse: true,
         docker_test: true
       }
