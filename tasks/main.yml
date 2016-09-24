@@ -1,48 +1,78 @@
 ---
-# tasks file for pr.moodle
+# tasks file for sa.lamp
 
 - name: LAMP | needed tools
   apt: update-cache=yes force=yes state=present pkg={{ item }}
   become: yes
   with_items: "{{pkg_dependencies}}"
+  tags:
+    - travis_1
 
 - name: LAMP | install python-pip
   apt: name=python-pip update_cache=yes state=latest
   become: yes
+  tags:
+    - travis_1
+
 
 - name: LAMP | Update pip
   shell: pip install -U pip
   become: yes
+  tags:
+    - travis_1
+
 
 - name: LAMP | Install modules for mysql management
   pip: name={{item}}
   become: yes
   with_items:
     - MySQL-python
+  tags:
+    - travis_1
+
 
 - name: LAMP | Enable multiverse
   include: "ubuntu_enable_multiverse.yml"
   when: option_enable_multiverse == true
+  tags:
+    - travis_1
+    - travis_2
+
 
 - name: LAMP | Install mysql
   include: "mysql.yml"
   when: option_install_mysql == true
+  tags:
+    - travis_2
+
 
 - name: LAMP | Install APACHE
   include: "apache.yml"
   when: option_install_apache == true
+  tags:
+    - travis_3
 
 - name: LAMP | Install LAMP stack - select php family
   include: "php_apt_switchversion.yml"
+  tags:
+    - travis_4
 
 - name: LAMP | Install LAMP stack
   include: "php_apache.yml"
   when: option_install_apache == true
+  tags:
+    - travis_4
+
 
 - name: LAMP | Install additional php extensions
   include: "php_additional_extensions.yml"
   when: php_extensions is defined
+  tags:
+    - travis_4
+
 
 - name: LAMP | Enable incoming http(s) with ufw
   include: "ubuntu_configure_existing_ufw.yml"
   when: option_enable_ufw_http == true
+  tags:
+    - travis_4
