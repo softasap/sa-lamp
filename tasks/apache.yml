@@ -13,9 +13,12 @@
       tags:
         - apache2
 
+# There is no apache2-mpm-worker package because the mpm_worker module is included by default when you install Apache on 16.04.
+# It is contained in the apache2-bin package that is a dependency of apache2 dpkg -L apache2-bin | grep mpm
+
     - name: Apache | install apache2 MPM Worker
       apt: name=apache2-mpm-worker state=latest
-      when: "apache_mode == 'worker' and apache_present|failed"
+      when: "apache_mode == 'worker' and not(ansible_distribution_release == 'xenial') and apache_present|failed"
       become: yes
       tags:
         - apache2
