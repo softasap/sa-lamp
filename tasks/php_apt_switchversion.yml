@@ -15,7 +15,13 @@
       -php
       -setup
 
-
+  - name: PHP | Fix php family prefix
+    set_fact:
+      - php_family_prefix: php
+    when: php_family == "default" and (ansible_distribution_release == "xenial") and  php_present|failed
+    tags:
+      -php
+      -setup
 
   - name: PHP | Add apt repository for php 5.4
     apt_repository: repo='ppa:ondrej/php5-oldstable'
