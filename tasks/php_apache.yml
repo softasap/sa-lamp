@@ -1,3 +1,16 @@
+  - name: LAMP | FAST-CGI configuration for php
+    template: src={{role_dir}}/templates/apache2/conf/fastcgi-php5.conf.j2 dest=/etc/apache2/conf-available/fastcgi.conf
+    when: "apache_mode == 'worker'"
+    become: yes
+    tags: setup
+    when: ansible_distribution_release == "trusty"
+
+  - name: LAMP | FAST-CGI configuration for php
+    template: src={{role_dir}}/templates/apache2/conf/fastcgi-php7.conf.j2 dest=/etc/apache2/conf-available/fastcgi.conf
+    when: "apache_mode == 'worker'"
+    become: yes
+    tags: setup
+    when: ansible_distribution_release == "xenial"
 
   - name: LAMP | a2enconf fastcgi
     command: a2enconf fastcgi
@@ -10,12 +23,6 @@
     tags: setup
 
   - block:
-
-    - name: LAMP | FAST-CGI configuration for php
-      template: src={{role_dir}}/templates/apache2/conf/fastcgi.conf.j2 dest=/etc/apache2/conf-available/fastcgi.conf
-      when: "apache_mode == 'worker'"
-      become: yes
-      tags: setup
 
     - name: LAMP | Install PHP FPM
       apt: name=php5-fpm state=latest
@@ -73,12 +80,6 @@
     when: ansible_distribution_release == "trusty"
 
   - block:
-
-    - name: LAMP | FAST-CGI configuration for php
-      template: src={{role_dir}}/templates/apache2/conf/fastcgi-php7.conf.j2 dest=/etc/apache2/conf-available/fastcgi.conf
-      when: "apache_mode == 'worker'"
-      become: yes
-      tags: setup
 
     - name: LAMP | Install PHP FPM
       apt: name=php-fpm state=latest
