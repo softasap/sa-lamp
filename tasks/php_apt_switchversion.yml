@@ -15,7 +15,7 @@
       -setup
 
   - name: PHP | Fix php family prefix
-    set_fact: php_family_prefix=php7
+    set_fact: php_family_prefix=php
     when: php_family == "default" and (ansible_distribution_release == "xenial") and  php_present|failed
     tags:
       -php
