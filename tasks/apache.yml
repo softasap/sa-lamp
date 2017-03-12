@@ -102,7 +102,7 @@
         - apache2
 
     - name: Apache |restart apache2
-      service: name=apache2 state=restarted
+      service: name=apache2 state=restarted enabled=yes
       become: yes
       when: docker_test is not defined
       tags:

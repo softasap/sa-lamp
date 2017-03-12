@@ -24,6 +24,8 @@
 
   php_family_prefix: php5
 
+  php_family_prefix: php5
+
   pkg_dependencies:
     - git
     - curl

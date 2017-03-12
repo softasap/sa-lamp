@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: vyacheslav voronenko
-  description: installs classic lamp (mysql apache (worker|prefork) php on ubuntu 14.04 LTS)
+  description: installs classic lamp (mysql apache (worker|prefork) php on ubuntu 14.04 LTS, 16.04 LTS)
   company: http://www.voronenko.info/
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -14,7 +14,7 @@ galaxy_info:
   # - Apache
   # - CC-BY
   license: MIT
-  min_ansible_version: 1.9.4
+  min_ansible_version: 2.1.0.0
   #
   # Below are all platforms currently available. Just uncomment
   # the ones that apply to your role. If you don't see your
@@ -27,6 +27,8 @@ galaxy_info:
         - xenial
   galaxy_tags:
     - php
+    - php5
+    - php7
     - mysql
     - apache
     - php-fpm
