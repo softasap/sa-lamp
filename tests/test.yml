@@ -3,12 +3,13 @@
 
   pre_tasks:
 
+    - debug: var="ansible_distribution"
+
     - name: TRAVIS TEST | Ensure multiverse repo is enabled
       apt_repository:
         repo: "{{item}}"
         update_cache: false
       register: multiverse_installed
-      when: ansible_distribution == 'Ubuntu'
       become: yes
       with_items:
         - 'deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} main multiverse'
