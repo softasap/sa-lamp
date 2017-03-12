@@ -16,11 +16,21 @@
         - 'deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} main multiverse'
         - 'deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}}-updates main multiverse'
         - 'deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}}-updates main multiverse'
+      tags:
+        - travis_1
+        - travis_2
+        - travis_3
+        - travis_4
 
     - apt:
         update_cache: true
       when: multiverse_installed | changed
       become: yes
+      tags:
+        - travis_1
+        - travis_2
+        - travis_3
+        - travis_4
 
   roles:
     - {
