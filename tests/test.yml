@@ -11,10 +11,10 @@
       when: ansible_distribution == 'Ubuntu'
       become: yes
       with_items:
-        - 'deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} multiverse'
-        - 'deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} multiverse'
-        - 'deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}}-updates multiverse'
-        - 'deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}}-updates multiverse'
+        - 'deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} main multiverse'
+        - 'deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} main multiverse'
+        - 'deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}}-updates main multiverse'
+        - 'deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}}-updates main multiverse'
 
     - apt:
         update_cache: true
