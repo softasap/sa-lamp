@@ -1,5 +1,5 @@
   - name: LAMP | FAST-CGI configuration for php
-    template: src={{role_dir}}/templates/apache2/conf/fastcgi.conf.j2 dest=/etc/apache2/conf-available/fastcgi.conf
+    template: src={{role_dir}}/templates/apache2/conf/fastcgi-{{ php_family_prefix }}.conf.j2 dest=/etc/apache2/conf-available/fastcgi.conf
     when: "apache_mode == 'worker'"
     become: yes
     tags: setup
@@ -27,7 +27,7 @@
       tags: setup
       become: yes
 
-    - name: LAMP | Install PHP5-cli
+    - name: LAMP | Install PHP-cli
       apt: name=php5-cli state=latest
       when: "apache_mode == 'worker'"
       tags: setup
@@ -121,6 +121,13 @@
 
     - name: LAMP | Install PHP MySQL extension
       apt: name=php-mysql state=latest
+      tags: setup
+      become: yes
+      notify:
+        - restart apache2
+
+    - name: LAMP | Install PHP libapache 
+      apt: name=libapache2-mod-php state=latest
       tags: setup
       become: yes
       notify:
