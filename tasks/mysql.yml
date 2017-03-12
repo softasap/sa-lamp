@@ -26,13 +26,6 @@
     tags:
       - mysql
 
-#  - name: MySQL | Copy configuration file
-#    template: src={{role_dir}}/templates/mysql/my.cnf.j2 dest=/etc/mysql/my.cnf backup=yes
-#    register: mysql_conf
-#    become: yes
-#    tags:
-#      - mysql
-
   - name: MySQL | install libmysqlclient-dev
     apt: name=libmysqlclient-dev update_cache=yes state=latest
     when: mysql_present|failed
@@ -40,15 +33,8 @@
     tags:
       - mysql
 
-#  - name: MySQL | Restart
-#    service: name=mysql state=restarted
-#    when: mysql_conf.changed
-#    become: yes
-#    tags:
-#      - mysql
-
   - name: MySQL | Check started
-    service: name=mysql state=restarted
+    service: name=mysql state=restarted enabled=yes
     when: docker_test is not defined
     become: yes
     tags:

@@ -22,7 +22,7 @@
 
     - name: Include environment related variables
       include_vars: "{{ item }}"
-      skip: true
+      ignore_errors: true
       with_first_found:
        - "{{env}}_vars.yml"
        - "local_vars.yml"
@@ -48,7 +48,7 @@
 
          php_family: default, # 5.4 | 5.5 | 5.6 | 7.0  default
 
-         # php_extensions: ["php-mysql", "php5-intl", "php5-xmlrpc", "php5-curl", "php5-gd"] # php5
-         php_extensions: ["php-mysql", "php-intl", "php-xmlrpc", "php-curl", "php-gd"] #php7
+         php_extensions: ["php5-mysql", "php5-intl", "php5-xmlrpc", "php5-curl", "php5-gd"] # php5
+         #php_extensions: ["php-mysql", "php-intl", "php-xmlrpc", "php-curl", "php-gd"] #php7
        }
 
