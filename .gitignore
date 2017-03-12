@@ -1,0 +1,6 @@
+box-example/roles
+*.retry
+*.swp
+*.idea
+*.save
+local*.sh
