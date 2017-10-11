@@ -1,5 +1,5 @@
   - name: LAMP | FAST-CGI configuration for php
-    template: src={{role_dir}}/templates/apache2/conf/fastcgi-{{ php_family_prefix }}.conf.j2 dest=/etc/apache2/conf-available/fastcgi.conf
+    template: src={{role_dir}}/templates/apache2/conf/fastcgi-{{ php_module_prefix }}.conf.j2 dest=/etc/apache2/conf-available/fastcgi.conf
     when: "apache_mode == 'worker'"
     become: yes
     tags: setup
@@ -74,38 +74,38 @@
   - block:
 
     - name: LAMP | Install PHP FPM
-      apt: name=php-fpm state=latest
+      apt: name="{{php_module_prefix}}-fpm" state=latest
       when: "apache_mode == 'worker'"
       tags: setup
       become: yes
 
     - name: LAMP | Install PHP and associated packages
-      apt: name=php state=latest
+      apt: name="{{php_module_prefix}}" state=latest
       tags: setup
       become: yes
 
     - name: LAMP | Install PHP5-cli
-      apt: name=php-cli state=latest
+      apt: name="{{php_module_prefix}}-cli" state=latest
       when: "apache_mode == 'worker'"
       tags: setup
       become: yes
 
     - name: LAMP | Install PHP GD library
-      apt: name=php-gd state=latest
+      apt: name="{{php_module_prefix}}-gd" state=latest
       tags: setup
       become: yes
       notify:
         - restart apache2
 
     - name: LAMP | Install PHP Curl
-      apt: name=php-curl state=latest
+      apt: name="{{php_module_prefix}}-curl" state=latest
       tags: setup
       become: yes
       notify:
         - restart apache2
 
     - name: LAMP | Install MCrypt extension
-      apt: name=php-mcrypt state=latest
+      apt: name="{{php_module_prefix}}-mcrypt" state=latest
       tags: setup
       become: yes
       notify:
@@ -120,13 +120,13 @@
         - restart apache2
 
     - name: LAMP | Install PHP MySQL extension
-      apt: name=php-mysql state=latest
+      apt: name="{{php_module_prefix}}-mysql" state=latest
       tags: setup
       become: yes
       notify:
         - restart apache2
 
-    - name: LAMP | Install PHP libapache 
+    - name: LAMP | Install PHP libapache
       apt: name=libapache2-mod-php state=latest
       tags: setup
       become: yes

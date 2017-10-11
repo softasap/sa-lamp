@@ -22,9 +22,8 @@
 
   php_family: default # 5.4 | 5.5 | 5.6 | 7.0 | default
 
-  php_family_prefix: php5
-
-  php_family_prefix: php5
+  php_module_prefix: php
+  php_fpm_prefix: php
 
   pkg_dependencies:
     - git
@@ -34,12 +33,10 @@
     - unzip
 
   php_extensions:
-    - "{{php_family_prefix}}-mysql"
-    - "{{php_family_prefix}}-intl"
-    - "{{php_family_prefix}}-xmlrpc"
-    - "{{php_family_prefix}}-curl"
-    - "{{php_family_prefix}}-gd"
+    - "{{php_module_prefix}}-mysql"
+    - "{{php_module_prefix}}-intl"
+    - "{{php_module_prefix}}-xmlrpc"
+    - "{{php_module_prefix}}-curl"
+    - "{{php_module_prefix}}-gd"
 
   timezone: Europe/London
-
-
