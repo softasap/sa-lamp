@@ -1,0 +1,15 @@
+---
+
+  - name: MySQL | Install colorer grc
+    package: name="grc" state="present"
+    become: yes
+    tags: mysql
+
+  - name: MySQL | Template colorer to current user
+    template: src="{{role_dir}}/templates/grcat.mysql" dest="~/grcat.mysql"
+    tags: psql
+
+  - name: MySql | mysql.cnf to current user
+    template: src="{{role_dir}}/templates/my.cnf.j2" dest="~/.my.cnf"
+    tags: psql
+

@@ -40,33 +40,20 @@
 
 
 - name: LAMP | Install mysql
-  include: "mysql.yml"
+  include: "sa-mysql/main.yml"
   when: option_install_mysql == true
   tags:
     - travis_2
 
 
 - name: LAMP | Install APACHE
-  include: "apache.yml"
+  include: "sa-apache/main.yml"
   when: option_install_apache == true
   tags:
     - travis_3
 
-- name: LAMP | Install LAMP stack - select php family
-  include: "php_apt_switchversion.yml"
-  tags:
-    - travis_4
-
-- name: LAMP | Install LAMP stack
-  include: "php_apache.yml"
-  when: option_install_apache == true
-  tags:
-    - travis_4
-
-
-- name: LAMP | Install additional php extensions
-  include: "php_additional_extensions.yml"
-  when: php_extensions is defined
+- name: LAMP | Install PHP for apache classic
+  include: "sa-php-apache/main.yml"
   tags:
     - travis_4
 
