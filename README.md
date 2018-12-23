@@ -1,7 +1,12 @@
-# Basic lamp role
+# Basic lamp role (archived, splitted into separate roles)
 
 [![Build Status](https://travis-ci.org/softasap/sa-lamp.svg?branch=master)](https://travis-ci.org/softasap/sa-lamp)
 
+
+# Update Dec 2018
+
+Actually, this role is combination of `sa-mysql`, `sa-apache`, `sa-apache-php`.
+Also, if you are looking into php in fpm mode, that might want to look into `sa-nginx` and `sa-php-fpm`. 
 
 # Background
 
