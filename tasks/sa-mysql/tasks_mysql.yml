@@ -4,6 +4,7 @@
 
   - name: MySQL | Check if is installed
     command: test -x /usr/bin/mysql
+    when: ansible_system == "Linux"
     register: mysql_present
     ignore_errors: yes
     tags:
@@ -11,31 +12,34 @@
 
   - name: MySQL | Preset root password
     shell: echo mysql-server-5.5 mysql-server/{{item}} password {{mysql_root_password}} | debconf-set-selections
-    when: mysql_present|failed
+    when: ansible_os_family == "Debian" and mysql_present|failed
     with_items:
-      - root_password
-      - root_password_again
+      - "root_password"
+      - "root_password_again"
     become: yes
     tags:
       - mysql
 
+
   - name: MySQL | Install
     apt: update-cache=yes force=yes state=present pkg=mysql-server
-    when: mysql_present|failed
+    when: ansible_os_family == "Debian" and mysql_present|failed
     become: yes
     tags:
       - mysql
 
   - name: MySQL | install libmysqlclient-dev
     apt: name=libmysqlclient-dev update_cache=yes state=latest
-    when: mysql_present|failed
+    when: ansible_os_family == "Debian" and mysql_present|failed
     become: yes
     tags:
       - mysql
 
-  - name: MySQL | Check started
-    service: name=mysql state=restarted enabled=yes
+  - name: MySQL | Restart
+    service: name=mysql state=restarted
+#    when: mysql_conf.changed
     when: docker_test is not defined
     become: yes
     tags:
       - mysql
+

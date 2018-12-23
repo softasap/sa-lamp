@@ -1,0 +1,43 @@
+---
+
+  - name: PHP-APACHE | Install dependencies for core php extensions
+    apt: pkg={{ item }} state=present
+    retries: 3
+    register: result
+    until: not result.failed
+    with_items: "{{ pkg_dependencies_core | default([]) }}"
+    become: yes
+    tags:
+      - php
+
+
+  - name: PHP-APACHE | Install core php extensions
+    apt: pkg={{ item }} state=present
+    retries: 3
+    register: result
+    until: not result.failed
+    with_items: "{{ php_extensions_core | default([]) }}"
+    become: yes
+    tags:
+      - php
+
+  - name: PHP-APACHE | Install dependencies for additional php extensions
+    apt: pkg={{ item }} state=present
+    retries: 3
+    register: result
+    until: not result.failed
+    with_items: "{{ pkg_dependencies | default([]) }}"
+    become: yes
+    tags:
+      - php
+
+
+  - name: PHP-APACHE | Install additional php extensions
+    apt: pkg={{ item }} state=present
+    retries: 3
+    register: result
+    until: not result.failed
+    with_items: "{{ php_extensions | default([]) }}"
+    become: yes
+    tags:
+      - php

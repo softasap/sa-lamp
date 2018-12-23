@@ -12,34 +12,66 @@
 # set to true, if your image comes with preconfigured ufw to allow incoming http/https
   option_enable_ufw_http: false
 
+# sa-mysql
+  option_harden_mysql: true
 
-  mysql_host: "127.0.0.1"
   mysql_root_user: root
-  mysql_root_password: caspiwrocl
+  mysql_root_password: devroot
 
-  apache_mode: worker # use prefork or worker variables
+# /sa-mysql
+
+# sa-apache
+  apache_mode: "worker" # prefork | worker
   apache2_disable_default: true
 
-  php_family: default # 5.4 | 5.5 | 5.6 | 7.0 | default
+  apache_modules:
+    - rewrite
+    - ssl
+# /sa-apache
 
-  php_family_prefix: php5
+# sa-php-apache
 
-  php_family_prefix: php5
+  option_install_xdebug: false
+  php_xdebug_version: 2.5.5
 
-  pkg_dependencies:
+  option_install_composer: true
+
+  apache_mode: worker # prefork not supported by role design, check sa-lamp
+
+  php_apache_user: www-data
+  php_apache_group: www-data
+
+
+  php_family: default # 5.4 | 5.5 | 5.6 | 7.0 | 7.1 | 7.2 | default
+
+  php_module_prefix: php
+
+  pkg_dependencies_core:
     - git
     - curl
-    - python-dev
     - libmysqlclient-dev
     - unzip
 
-  php_extensions:
-    - "{{php_family_prefix}}-mysql"
-    - "{{php_family_prefix}}-intl"
-    - "{{php_family_prefix}}-xmlrpc"
-    - "{{php_family_prefix}}-curl"
-    - "{{php_family_prefix}}-gd"
+  pkg_dependencies: []
+
+  php_extensions_core:
+    - "{{php_module_prefix}}-mysql"
+    - "{{php_module_prefix}}-intl"
+    - "{{php_module_prefix}}-xmlrpc"
+    - "{{php_module_prefix}}-curl"
+    - "{{php_module_prefix}}-gd"
+
+  php_extensions: []
 
   timezone: Europe/London
+
+  xdebug_remote_enable: 1
+# IMPORTANT - SETTING BELOW TO 1 ON PROD SERVERS RESULTS TO EXPLOIT
+# AS  xdebug_remote_host is ignored
+  xdebug_remote_connect_back: 0
+  xdebug_remote_host: "127.0.0.1"
+
+
+# /sa-php-apache 
 
 

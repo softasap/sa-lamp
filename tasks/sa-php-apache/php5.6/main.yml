@@ -1,0 +1,21 @@
+---
+
+  - name: PHP APACHE | Install base php package 
+    package: name="php{{php_version}}" state="present"
+    become: yes
+    tags:
+      - php
+
+
+  - name: PHP APACHE | Install base php package module
+    package: name="libapache2-mod-php{{php_version}}" state="present"
+    become: yes
+    tags:
+      - php
+
+  - name: PHP APACHE | Force restart apache service
+    service: name="apache2" state="restarted"
+    when: docker_test is not defined     
+    become: yes
+    tags:
+      - php

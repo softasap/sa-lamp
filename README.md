@@ -1,7 +1,12 @@
-# Basic lamp role
+# Basic lamp role (archived, splitted into separate roles)
 
 [![Build Status](https://travis-ci.org/softasap/sa-lamp.svg?branch=master)](https://travis-ci.org/softasap/sa-lamp)
 
+
+# Update Dec 2018
+
+Actually, this role is combination of `sa-mysql`, `sa-apache`, `sa-apache-php`.
+Also, if you are looking into php in fpm mode, that might want to look into `sa-nginx` and `sa-php-fpm`. 
 
 # Background
 
@@ -71,6 +76,7 @@ Nowadays worker is preferable.
 
 ### Version History
 
+1.4.0  In OAndrey repo used, the oldest php supported is 5.6 now
 1.3.0  (cosmetic) Fixed mess with tags in meta
 1.2.0  Support for ansible 2.0 syntax ; Introduced tests for 16.04
 
@@ -100,7 +106,14 @@ Please adjust the path accordingly.
 Copyright and license
 ---------------------
 
-Code licensed under the [BSD 3 clause] (https://opensource.org/licenses/BSD-3-Clause) or the [MIT License] (http://opensource.org/licenses/MIT).
+Code is dual licensed under the [BSD 3 clause] (https://opensource.org/licenses/BSD-3-Clause) and the [MIT License] (http://opensource.org/licenses/MIT). Choose the one that suits you best.
+
+Reach us:
 
 Subscribe for roles updates at [FB] (https://www.facebook.com/SoftAsap/)
 
+Join gitter discussion channel at [Gitter](https://gitter.im/softasap)
+
+Discover other roles at  http://www.softasap.com/roles/registry_generated.html
+
+visit our blog at http://www.softasap.com/blog/archive.html

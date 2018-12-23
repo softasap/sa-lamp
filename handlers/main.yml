@@ -5,3 +5,9 @@
     service: name=apache2 state=restarted enabled=yes
     when: docker_test is not defined
     become: yes
+
+  - name: restart mysql
+    service: name=mysql state=restarted
+    become: yes
+    when: docker_test is not defined
+
